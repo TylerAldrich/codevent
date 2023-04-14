@@ -3,7 +3,7 @@ mod solutions {
     pub mod year_2022;
 }
 
-use std::{fs::File, io::Read};
+use std::path::Path;
 
 use clap::Parser;
 use parser::parse_file;
@@ -42,7 +42,7 @@ fn main() {
     let input_path = format!("src/solutions/year_{}/day{}/", args.year, args.day);
     if args.test {
         func(parse_file(input_path.clone() + "test_input.txt"));
-        log_test_solution(input_path);
+        log_test_solution(input_path, args.solution);
     } else {
         func(parse_file(input_path + "input.txt"));
     }
@@ -58,12 +58,19 @@ fn get_solution_fn(day: u8, solution: u8) -> impl Fn(Vec<String>) {
     }
 }
 
-fn log_test_solution(filename: String) {
+fn log_test_solution(filename: String, solution: u8) {
     let filename = filename + "test_solution.txt";
-    let mut file = File::open(filename).expect("test_solution.txt does not exist");
-
-    let mut result = String::new();
-    file.read_to_string(&mut result)
-        .expect("Failed to read file to string");
-    println!("Test solution is: {}", result);
+    if Path::new(&filename).exists() {
+        let test_solutions = parse_file(filename);
+        if test_solutions.len() == 0 {
+            // do nothing
+        } else if test_solutions.len() == 1 && solution != 1 {
+            // do nothing, no test data
+        } else if test_solutions.len() >= 1 {
+            println!(
+                "Test solution is: {}",
+                test_solutions.get((solution - 1) as usize).unwrap()
+            );
+        }
+    }
 }
