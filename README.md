@@ -13,7 +13,7 @@ solutions/
             test_solution.txt  <-- The test input solution used in the puzzle explanation
         day2/
         ... etc
-
+```
 
 `solution.rs` must contain two public functions:
 
