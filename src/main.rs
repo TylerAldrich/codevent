@@ -57,6 +57,9 @@ fn get_solution_fn(day: u8, solution: u8) -> impl Fn(Vec<String>) {
 
         (2, 1) => solutions::year_2022::day2::solution::solution_one,
         (2, 2) => solutions::year_2022::day2::solution::solution_two,
+
+        (3, 1) => solutions::year_2022::day3::solution::solution_one,
+        (3, 2) => solutions::year_2022::day3::solution::solution_two,
         _ => panic!("invalid day/solution! day must be between 1-25, solution must be 1-2"),
     }
 }
