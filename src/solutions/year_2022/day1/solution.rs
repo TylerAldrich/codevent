@@ -1,8 +1,4 @@
-use crate::parser::parse_file;
-
-pub fn solution_one(filename: String) {
-    let input = parse_file(filename);
-
+pub fn solution_one(input: Vec<String>) {
     let mut elves: Vec<usize> = Vec::new();
     let mut total_calories = 0;
     for value in input {
@@ -26,8 +22,6 @@ pub fn solution_one(filename: String) {
     println!("Solution: {}", max)
 }
 
-pub fn solution_two(filename: String) {
-    let input = parse_file(filename);
-
+pub fn solution_two(input: Vec<String>) {
     println!("{:?}", input);
 }

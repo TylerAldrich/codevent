@@ -6,6 +6,7 @@ mod solutions {
 use std::{fs::File, io::Read};
 
 use clap::Parser;
+use parser::parse_file;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -36,18 +37,20 @@ fn main() {
     // );
 
     let func = get_solution_fn(args.day, args.solution);
-    let input_path = format!("solutions/year_{}/day{}/", args.year, args.day);
+    // TODO: This path should be relative from main.rs, so it doesnt need to include src/
+    // Currently fails if you're not running from the root of the project
+    let input_path = format!("src/solutions/year_{}/day{}/", args.year, args.day);
     if args.test {
-        func(input_path.clone() + "test_input.txt");
+        func(parse_file(input_path.clone() + "test_input.txt"));
         log_test_solution(input_path);
     } else {
-        func(input_path + "input.txt");
+        func(parse_file(input_path + "input.txt"));
     }
 }
 
 // TODO: Year is ignored. Fix in future years.
 // TODO: Could probably write this as a proc macro instead of manually inputting everything
-fn get_solution_fn(day: u8, solution: u8) -> impl Fn(String) {
+fn get_solution_fn(day: u8, solution: u8) -> impl Fn(Vec<String>) {
     match (day, solution) {
         (1, 1) => solutions::year_2022::day1::solution::solution_one,
         (1, 2) => solutions::year_2022::day1::solution::solution_two,
