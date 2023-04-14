@@ -1,6 +1,6 @@
 ### Advent of Code 2022+ 
 
-A little CLI framework I made to run my advent of code solutions. All solutions are in the `solutions` folder, broken down by year/day, so avoid that if you're trying to avoid spoilers.
+A little CLI framework I made to run my [Advent of Code](https://adventofcode.com) solutions. All solutions are in the `solutions` folder, broken down by year/day, so avoid that if you're trying to avoid spoilers.
 
 The solutions layout required to run properly is:
 ```
